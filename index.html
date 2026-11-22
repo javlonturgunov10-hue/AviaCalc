@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="AviaCalc: calculators for aviation students (unit conversions, runway length, taxiway curves, capacities and operation time).">
+<meta name="theme-color" content="#2F5BFF">
+<title>AviaCalc</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+<header class="hero">
+  <svg class="path" viewBox="0 0 1440 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M-40 470 C 260 150, 760 70, 1480 270" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 15"/>
+  </svg>
+  <div class="in">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" role="img" aria-label="AviaCalc logo">
+        <rect width="64" height="64" rx="20" fill="#FFC933"/>
+        <g transform="translate(32 32) rotate(45) scale(.78) translate(-32 -32)" fill="#0B1B3F">
+          <path d="M32 8c3 0 4.5 4 4.5 11V44c0 4-2 7.500-4.500 10-2.500-2.500-4.500-6-4.500-10V19C27.500 12 29 8 32 8z"/>
+          <path d="M28 26 7 41v5l21-7h8l21 7v-5L36 26z"/>
+          <path d="M28 46l-8 7v3l8-4h8l8 4v-3l-8-7z"/>
+        </g>
+      </svg>
+      <span>AviaCalc</span>
+    </div>
+    <h1>Welcome to AviaCalc</h1>
+    <p class="lead">Calculators for aviation students. Pick a problem type, enter your values, and get the answer.</p>
+    <a class="cta" href="#problems">Start calculating</a>
+  </div>
+  <svg class="clouds" viewBox="0 0 1440 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <rect y="124" width="1440" height="30"/>
+    <circle cx="80" cy="118" r="38"/><circle cx="190" cy="104" r="46"/><circle cx="310" cy="122" r="34"/>
+    <circle cx="420" cy="108" r="42"/><circle cx="560" cy="120" r="36"/><circle cx="690" cy="100" r="50"/>
+    <circle cx="830" cy="118" r="40"/><circle cx="950" cy="106" r="44"/><circle cx="1080" cy="122" r="36"/>
+    <circle cx="1200" cy="102" r="48"/><circle cx="1330" cy="116" r="40"/><circle cx="1420" cy="108" r="36"/>
+  </svg>
+</header>
+
+<main id="problems" class="wrap">
+<div id="hv">
+  <button class="back" id="back" type="button" hidden>Back to all problem types</button>
+  <h2 id="h">Choose a problem type</h2>
+  <p class="sub" id="sub">Each calculator asks for your values and shows the answer.</p>
+  <ul class="grid" id="grid"></ul>
+  <p id="note" role="status" aria-live="polite"></p>
+</div>
+<section id="cv" hidden>
+  <button class="back" id="cback" type="button">Back to all problem types</button>
+  <h2>Unit conversions</h2>
+  <p class="sub">Choose a category, type a value, and the answer updates as you type.</p>
+  <ul class="cats" id="cats"></ul>
+  <div class="panel" id="panel">
+    <div class="ph"><span class="tile"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path id="pip" d=""/></svg></span><h3 id="pname"></h3></div>
+    <div class="box">
+      <div class="irow">
+        <div><label class="fld" for="val">Value</label><div class="inw"><input id="val" type="text" inputmode="decimal" autocomplete="off" placeholder="Enter a value"><button class="sign" id="sign" type="button" aria-label="Change sign">±</button></div></div>
+        <div><label class="fld" for="from">From</label><select id="from"></select></div>
+      </div>
+      <p class="msg" id="msg" role="alert"></p>
+    </div>
+    <button class="swap" id="swap" type="button" aria-label="Swap units"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4"/></svg></button>
+    <div class="res">
+      <label class="fld" for="to">Convert to</label><select id="to"></select>
+      <div class="rval" aria-live="polite"><span id="rnum">—</span><small id="runit"></small></div>
+    </div>
+    <ul class="det"><li><span>Input</span><b id="d1">—</b></li><li><span>Result</span><b id="d2">—</b></li><li><span>Calculation</span><b id="d3">—</b></li></ul>
+    <div class="acts"><button class="btn p" id="copy" type="button" disabled>Copy result</button><button class="btn" id="clear" type="button">Clear</button></div>
+  </div>
+</section>
+<section id="rw" hidden style="--c:#FFC933;--ci:#0B1B3F">
+  <button class="back" id="rback" type="button">Back to all problem types</button>
+  <h2>Runway length</h2>
+  <p class="sub">Enter all five values. The calculation starts automatically.</p>
+  <div class="panel">
+    <div class="box" id="rform">
+      <div class="rgrid" id="rfields"></div>
+      <p class="cnt" id="rcount" role="status"></p>
+      <button class="linkbtn" id="rlink" type="button">How to find TOW and TOR length</button>
+    </div>
+    <ol class="steps" id="steps"><li>1 TOW and Lb</li><li>2 Altitude (La)</li><li>3 Temperature (Lt)</li><li>4 Gradient (Lr)</li></ol>
+    <div class="stage" id="ref" hidden>
+      <h4>How to find TOW and TOR length</h4>
+      <ol>
+        <li>Diagram 1: X = Range / 1000 and Y = (OEW + Payload) / 1000. Go up from X, across from Y, and read the Brake Release Gross Weight line through the intersection, or the closest line if the point falls between lines. The label of that line is the TOW.</li>
+        <li>Diagram 2: go up from the TOW to the 0 ft curve (standard day, 15 °C, 0 % gradient), then left to the take-off runway length axis. This is Lb. Convert units where needed (1,000 ft = 304.8 m).</li>
+        <li>The app repeats this reading by computer from digitised copies of both curves, so TOW and Lb are approximate chart readings. Outside the plotted region the nearest chart boundary is used and the result is flagged as approximate.</li>
+      </ol>
+      <figure><img alt="Diagram 1: range, OEW plus payload and brake release gross weight" src="assets/diagrams/diagram-1-weight-range.png"><figcaption>Diagram 1: Brake Release Gross Weight (TOW) from range and OEW + Payload.</figcaption></figure>
+      <figure><img alt="Diagram 2: FAR take-off runway length against take-off weight" src="assets/diagrams/diagram-2-takeoff-runway-length.png"><figcaption>Diagram 2: take-off runway length (Lb). The red lines are a worked example for the 0 ft curve.</figcaption></figure>
+    </div>
+    <div id="rout" hidden>
+      <div id="rrep"></div>
+      <div class="acts" id="rbtns"><button class="btn p" id="rprint" type="button">Download PDF report</button><button class="btn" id="rclear" type="button">Clear all</button></div>
+      <p class="disc" id="rpdf">Creates a PDF of this solution. You will be asked to confirm the download.</p>
+    </div>
+  </div>
+</section>
+<section id="gc" hidden>
+  <button class="back" id="gback" type="button">Back to all problem types</button>
+  <h2 id="gh"></h2>
+  <p class="sub" id="gsub"></p>
+  <div class="panel">
+    <div class="box" id="gform"><div class="rgrid" id="gfields"></div><p class="cnt" id="gcount" role="status"></p></div>
+    <div id="gout" hidden>
+      <div id="grep"></div>
+      <div class="acts" id="gbtns"><button class="btn p" id="gprint" type="button">Download PDF report</button><button class="btn" id="gclear" type="button">Clear all</button></div>
+      <p class="disc" id="gpdf">Creates a PDF of this solution. You will be asked to confirm the download.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <p class="copy">&copy; 2026 Turgunov J. All rights reserved.</p>
+  <p>Student ID: AE18097</p>
+</footer>
+
+<!-- PDF library (optional: without it the print dialog is used) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/home.js"></script>
+<script src="js/converter-engine.js"></script>
+<script src="js/converter.js"></script>
+<script src="js/report.js"></script>
+<script src="js/runway-data.js"></script>
+<script src="js/runway-engine.js"></script>
+<script src="js/runway.js"></script>
+<script src="js/calculators-config.js"></script>
+<script src="js/calculators.js"></script>
+<script src="js/router.js"></script>
+</body>
+</html>

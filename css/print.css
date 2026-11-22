@@ -1,0 +1,42 @@
+/*
+ * AviaCalc | Print styles
+ * Used by the browser print dialog (fallback when the PDF library cannot load).
+ * Author: Turgunov J (Student ID AE18097)
+ */
+
+@media print {
+  body::before,.hero,.back,.cats {
+    display: none!important
+  }
+  #hv,#cv,#rw>h2,#rw>.sub,#rform,#steps,#rbtns {
+    display: none!important
+  }
+  #ref[hidden] {
+    display: block!important
+  }
+  .ptitle {
+    display: block
+  }
+  .res {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact
+  }
+  .stage,.res,.det {
+    break-inside: avoid
+  }
+
+}
+
+@media print {
+  #gc>h2,#gc>.sub,#gform,#gbtns {
+    display: none!important
+  }
+
+}
+
+@media print {
+  .site-footer {
+    display: none
+  }
+
+}

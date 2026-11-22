@@ -1,0 +1,328 @@
+/*
+ * AviaCalc | Base styles
+ * Design tokens, page layout, hero, problem cards and site footer.
+ * Author: Turgunov J (Student ID AE18097)
+ */
+
+:root {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --ink: #0B1B3F;
+  --muted: #56607F;
+  --line: #DCE4FA;
+  --hero: #2F5BFF;
+  --hero-ink: #FFFFFF;
+  --hero-soft: #E4EBFF;
+  --sun: #FFC933;
+  --focus: #2F5BFF;
+  --display: "Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top,0px)
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  html {
+    scroll-behavior: smooth
+  }
+
+}
+
+*,*::before,*::after {
+  box-sizing: inherit
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top,0px);
+  background: var(--hero);
+  z-index: 10
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--hero);
+  color: var(--hero-ink);
+  min-height: clamp(480px,74vh,640px);
+  padding: 2rem 1.25rem 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.path,.clouds {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none
+}
+
+.path {
+  top: 0;
+  height: 100%
+}
+
+.clouds {
+  bottom: -1px;
+  height: clamp(64px,10vw,150px);
+  fill: var(--bg)
+}
+
+.hero>.in {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: 2rem
+}
+
+.brand svg {
+  width: 52px;
+  height: 52px
+}
+
+.brand span {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -.01em
+}
+
+h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.5rem,9vw,4.75rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  margin: 0 0 1.1rem;
+  max-width: 13ch;
+  text-wrap: balance;
+
+}
+
+.lead {
+  max-width: 34ch;
+  margin: 0 0 2rem;
+  font-size: 1.2rem;
+  color: var(--hero-soft)
+}
+
+.cta {
+  display: inline-block;
+  background: var(--sun);
+  color: #0B1B3F;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: .85rem 1.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+
+}
+
+.cta:hover {
+  background: #FFD65C
+}
+
+.cta:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px
+}
+
+/* Problem types */
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.25rem
+}
+
+main {
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+  scroll-margin-top: 1rem
+}
+
+h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.6rem,4vw,2.1rem);
+  letter-spacing: -.02em;
+  text-align: center;
+  margin: 0 0 .35rem
+}
+
+.sub {
+  text-align: center;
+  color: var(--muted);
+  margin: 0 0 2rem
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill,minmax(280px,1fr))
+}
+
+.card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 56px 1fr 22px;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem 1rem 1rem;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  .card {
+    transition: transform .15s,border-color .15s
+  }
+
+}
+
+.card:hover {
+  border-color: var(--c);
+  transform: translateY(-2px)
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px
+}
+
+.tile {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--c);
+  color: var(--ci,#fff);
+  display: grid;
+  place-items: center
+}
+
+.tile svg {
+  width: 28px;
+  height: 28px
+}
+
+.title {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  letter-spacing: -.01em
+}
+
+.desc {
+  display: block;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.4;
+  margin-top: .2rem
+}
+
+.chev {
+  width: 22px;
+  height: 22px;
+  color: var(--muted)
+}
+
+svg.i {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+#note {
+  margin: 1.75rem 0 0;
+  min-height: 1.5em;
+  text-align: center;
+  color: var(--muted)
+}
+
+.back {
+  display: block;
+  margin: 0 auto 1.25rem;
+  padding: .5rem 1.1rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer
+}
+
+.back[hidden] {
+  display: none
+}
+
+.back:hover {
+  border-color: var(--ink)
+}
+
+.back:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px
+}
+
+/* Site footer */
+.site-footer {
+  margin-top: 1rem;
+  padding: 1.5rem 1.25rem 2rem;
+  border-top: 2px solid var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: .92rem
+}
+
+.site-footer p {
+  margin: .15rem 0
+}
+
+.site-footer .copy {
+  color: var(--ink);
+  font-weight: 600
+}
